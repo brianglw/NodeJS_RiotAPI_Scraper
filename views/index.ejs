@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match History</title>
+</head>
+<body>
+    <div>
+
+        <% locals?.matchHistory?.forEach((match, index) => {%>
+            <% let num = match.last_round %>
+            <div><%=match.riotIdGameName%> - Game <%= index + 1 %></div>
+            <p>Gold left: <%=match.gold_left%></p>
+            <p>Last round: <%= num <= 4 ? `0-${num % 7}` : `${1+(Math.ceil((num-4)/7))}-${(num-4)%7}`%></p>
+            <p>Level: <%= match.level%></p>
+            <p>Score: <%= match.missions.PlayerScore2%></p>
+            <p>Placement: <%=match.placement%></p>
+            <p>Players Eliminated: <%=match.players_eliminated %></p>
+            <p>Total Damage to Players: <%=match.total_damage_to_players%></p>
+            <p>Traits: 
+                <%match.traits.forEach(trait => { %>
+                    <span><%=trait.name%>-<%=trait.num_units%></span>
+                <%})%>
+            </p>
+            <p>Units: 
+                <%match.units.forEach(unit => { %>
+                    <span><%=unit.character_id%>-<%=unit.tier%>: <%unit?.itemNames?.join(", ")%></span>
+                <%})%>
+            </p>
+        <%})%> 
+
+    </div>
+</body>
+</html>
